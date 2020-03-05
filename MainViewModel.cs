@@ -7,6 +7,10 @@ using LibVLCSharp.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.AccessCache;
 
 namespace LibVLCSharp.UWP.Sample
 {
@@ -30,8 +34,10 @@ namespace LibVLCSharp.UWP.Sample
             InitializedCommand = new RelayCommand<InitializedEventArgs>(Initialize);
             DiscoverCommand = new RelayCommand<EventArgs>(DiscoverChromecasts);
             CastCommand = new RelayCommand<EventArgs>(StartCasting);
+            OpenFileCommand = new RelayCommand<EventArgs>(OpenFile);
             Core.Initialize();
         }
+
 
         /// <summary>
         /// Destructor
@@ -49,6 +55,8 @@ namespace LibVLCSharp.UWP.Sample
         public ICommand DiscoverCommand { get; }
 
         public ICommand CastCommand { get; }
+
+        public ICommand OpenFileCommand { get; }
 
         private LibVLC LibVLC { get; set; }
 
@@ -71,10 +79,20 @@ namespace LibVLCSharp.UWP.Sample
             }
         }
 
+        public string KeyStoreFilename { get; set; } = "VLC_MediaElement_KeyStore";
+
+
+
         private async void Initialize(InitializedEventArgs eventArgs)
         {
             List<string> options = new List<string>(eventArgs.SwapChainOptions);
             options.Add("--verbose=3");
+            options.Add("--aout=winstore");
+            options.Add("--avcodec-fast");
+            options.Add("--subsdec-encoding");
+
+
+            options.Add($"--keystore-file={Path.Combine(ApplicationData.Current.LocalFolder.Path, KeyStoreFilename)}");
             LibVLC = new LibVLC(options.ToArray());
             LibVLC.Log += LibVLC_Log;
 
@@ -82,6 +100,17 @@ namespace LibVLCSharp.UWP.Sample
 
             //MediaPlayer.Play(new Media(LibVLC, "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             //    FromType.FromLocation));
+
+            // create new media
+            //LibVLCSharp.Shared.Media
+            var media = new Media(LibVLC,
+                //@"C:\Temp\lesson5.mp4",
+                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                FromType.FromLocation);
+
+            MediaPlayer.Media = media;
+
+            MediaPlayer.Play();
         }
 
         private void LibVLC_Log(object sender, LogEventArgs e)
@@ -110,14 +139,33 @@ namespace LibVLCSharp.UWP.Sample
 
         }
 
+        private const string FILE_TOKEN = "{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}";
+
+        private async void OpenFile(EventArgs obj)
+        {
+            var fileOpenPicker = new FileOpenPicker()
+            {
+                SuggestedStartLocation = PickerLocationId.VideosLibrary
+            };
+            fileOpenPicker.FileTypeFilter.Add("*");
+            var file = await fileOpenPicker.PickSingleFileAsync();
+
+
+            if (file != null)
+            {
+
+                StorageApplicationPermissions.FutureAccessList.AddOrReplace(FILE_TOKEN, file);
+                
+                MediaPlayer.Stop();
+                var media = new Media(LibVLC, $"winrt://{FILE_TOKEN}", FromType.FromLocation);
+                MediaPlayer.Media = media;
+                MediaPlayer.Play();
+            }
+        }
+
+
         private void StartCasting(EventArgs eventArgs)
         {
-            // create new media
-            //LibVLCSharp.Shared.Media
-            var media = new Media(LibVLC,
-                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-                FromType.FromLocation);
-
             // abort casting if no renderer items were found
             if (!_rendererItems.Any())
             {
@@ -125,18 +173,14 @@ namespace LibVLCSharp.UWP.Sample
             }
             else
             {
+                MediaPlayer.Stop();
                 // set the previously discovered renderer item (chromecast) on the mediaplayer
                 // if you set it to null, it will start to render normally (i.e. locally) again
-                var r = _rendererItems.FirstOrDefault(item => item.Name.Contains("Play room"));
+                var r = _rendererItems.FirstOrDefault(item => item.Name.Contains("Dining"));
                 MediaPlayer.SetRenderer(r);
+
+                MediaPlayer.Play();
             }
-
-            MediaPlayer.Stop();
-
-            MediaPlayer.Media = media;
-
-            // start the playback
-            var result = MediaPlayer.Play();
         }
 
 
