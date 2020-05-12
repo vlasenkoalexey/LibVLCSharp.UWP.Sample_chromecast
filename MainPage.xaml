@@ -24,6 +24,7 @@
             <Button Command="{Binding DiscoverCommand}" >Discover</Button>
             <Button Command="{Binding CastCommand}">Cast</Button>
             <Button Command="{Binding OpenFileCommand}">Open File</Button>
+            <Button Command="{Binding OpenFileStreamCommand}">Open File As Stream</Button>
         </StackPanel> 
         <lvs:VideoView MediaPlayer="{Binding MediaPlayer}" Grid.Row="1">
             <interactivity:Interaction.Behaviors>

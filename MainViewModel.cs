@@ -35,6 +35,7 @@ namespace LibVLCSharp.UWP.Sample
             DiscoverCommand = new RelayCommand<EventArgs>(DiscoverChromecasts);
             CastCommand = new RelayCommand<EventArgs>(StartCasting);
             OpenFileCommand = new RelayCommand<EventArgs>(OpenFile);
+            OpenFileStreamCommand = new RelayCommand<EventArgs>(OpenFileStream);
             Core.Initialize();
         }
 
@@ -57,6 +58,8 @@ namespace LibVLCSharp.UWP.Sample
         public ICommand CastCommand { get; }
 
         public ICommand OpenFileCommand { get; }
+
+        public ICommand OpenFileStreamCommand { get; }
 
         private LibVLC LibVLC { get; set; }
 
@@ -150,14 +153,39 @@ namespace LibVLCSharp.UWP.Sample
             fileOpenPicker.FileTypeFilter.Add("*");
             var file = await fileOpenPicker.PickSingleFileAsync();
 
+            
+            if (file != null)
+            {
+                StorageApplicationPermissions.FutureAccessList.AddOrReplace(FILE_TOKEN, file);
+                var media = new Media(LibVLC, $"winrt://{FILE_TOKEN}", FromType.FromLocation);
+
+                MediaPlayer.Stop();
+                MediaPlayer.Media = media;
+                MediaPlayer.Play();
+            }
+            
+
+        }
+
+        private async void OpenFileStream(EventArgs obj)
+        {
+            var fileOpenPicker = new FileOpenPicker()
+            {
+                SuggestedStartLocation = PickerLocationId.VideosLibrary
+            };
+            fileOpenPicker.FileTypeFilter.Add("*");
+            var file = await fileOpenPicker.PickSingleFileAsync();
+
 
             if (file != null)
             {
+                var stream = await file.OpenReadAsync();
+                var streamForRead = stream.AsStreamForRead();
+                Debug.WriteLine($"streamForRead.CanSeek: {streamForRead.CanSeek}");
+                var media = new Media(LibVLC, new StreamMediaInput(streamForRead));
 
-                StorageApplicationPermissions.FutureAccessList.AddOrReplace(FILE_TOKEN, file);
-                
+
                 MediaPlayer.Stop();
-                var media = new Media(LibVLC, $"winrt://{FILE_TOKEN}", FromType.FromLocation);
                 MediaPlayer.Media = media;
                 MediaPlayer.Play();
             }
