@@ -11,6 +11,8 @@ using System.IO;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.AccessCache;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace LibVLCSharp.UWP.Sample
 {
@@ -33,7 +35,7 @@ namespace LibVLCSharp.UWP.Sample
         {
             InitializedCommand = new RelayCommand<InitializedEventArgs>(Initialize);
             DiscoverCommand = new RelayCommand<EventArgs>(DiscoverChromecasts);
-            CastCommand = new RelayCommand<EventArgs>(StartCasting);
+            CastCommand = new RelayCommand<FrameworkElement>(StartCasting);
             OpenFileCommand = new RelayCommand<EventArgs>(OpenFile);
             OpenFileStreamCommand = new RelayCommand<EventArgs>(OpenFileStream);
             Core.Initialize();
@@ -84,6 +86,57 @@ namespace LibVLCSharp.UWP.Sample
 
         public string KeyStoreFilename { get; set; } = "VLC_MediaElement_KeyStore";
 
+        private MenuFlyout RendererFlyout
+        {
+            get
+            {
+                var flyout = new MenuFlyout();
+
+                if (_rendererItems.Count == 0)
+                {
+                    flyout.Items.Add(new MenuFlyoutItem
+                    {
+                        IsEnabled = false,
+                        Text = ("NoCastFound")
+                    });
+                }
+                else
+                {
+                    foreach (var ri in _rendererItems)
+                    {
+                        var menuFlyoutItem = new MenuFlyoutItem
+                        {
+                            Text = ri.Name
+                        };
+
+                        menuFlyoutItem.Click += (object sender, RoutedEventArgs e) =>
+                        {
+                            var item = sender as MenuFlyoutItem;
+                            MediaPlayer.Stop();
+                            MediaPlayer.SetRenderer(_rendererItems.Where(rendererItem => rendererItem.Name == item.Text).First());
+                            MediaPlayer.Play();
+                        };
+
+                        flyout.Items.Add(menuFlyoutItem);
+                    }
+
+                    var disconnectFlyoutItem = new MenuFlyoutItem
+                    {
+                        Text = ("DisconnectCast")
+                    };
+
+                    disconnectFlyoutItem.Click += (object sender, RoutedEventArgs e) =>
+                    {
+                        MediaPlayer.SetRenderer(null);
+                    };
+
+                    flyout.Items.Add(disconnectFlyoutItem);
+                }
+
+                return flyout;
+            }
+        }
+
 
 
         private async void Initialize(InitializedEventArgs eventArgs)
@@ -118,7 +171,8 @@ namespace LibVLCSharp.UWP.Sample
 
         private void LibVLC_Log(object sender, LogEventArgs e)
         {
-            Debug.WriteLine(e.Message);
+            Debug.WriteLine($"LibVLC -> {e.Module}: {e.Message}");
+            //Debug.WriteLine(e.Message);
         }
 
         void DiscoverChromecasts(EventArgs args)
@@ -188,27 +242,30 @@ namespace LibVLCSharp.UWP.Sample
                 MediaPlayer.Stop();
                 MediaPlayer.Media = media;
                 MediaPlayer.Play();
+                //MediaPlayer = new MediaPlayer(media);
+                //MediaPlayer.Play();
             }
         }
 
 
-        private void StartCasting(EventArgs eventArgs)
+        private void StartCasting(FrameworkElement sender)
         {
             // abort casting if no renderer items were found
-            if (!_rendererItems.Any())
-            {
-                Debug.WriteLine("No renderer items found. Abort casting...");
-            }
-            else
-            {
-                MediaPlayer.Stop();
-                // set the previously discovered renderer item (chromecast) on the mediaplayer
-                // if you set it to null, it will start to render normally (i.e. locally) again
-                var r = _rendererItems.FirstOrDefault(item => item.Name.Contains("Dining"));
-                MediaPlayer.SetRenderer(r);
+            //if (!_rendererItems.Any())
+            //{
+            //    Debug.WriteLine("No renderer items found. Abort casting...");
+            //}
+            //else
+            //{
+            //    MediaPlayer.Stop();
+            //    // set the previously discovered renderer item (chromecast) on the mediaplayer
+            //    // if you set it to null, it will start to render normally (i.e. locally) again
+            //    var r = _rendererItems.FirstOrDefault(item => item.Name.Contains("Office"));
+            //    MediaPlayer.SetRenderer(r);
 
-                MediaPlayer.Play();
-            }
+            //    MediaPlayer.Play();
+            //}
+            RendererFlyout.ShowAt(sender);
         }
 
 
