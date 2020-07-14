@@ -13,6 +13,9 @@ using Windows.Storage.Pickers;
 using Windows.Storage.AccessCache;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Windows.UI.Popups;
+using System.Threading;
+using Windows.ApplicationModel.Core;
 
 namespace LibVLCSharp.UWP.Sample
 {
@@ -40,7 +43,6 @@ namespace LibVLCSharp.UWP.Sample
             OpenFileStreamCommand = new RelayCommand<EventArgs>(OpenFileStream);
             Core.Initialize();
         }
-
 
         /// <summary>
         /// Destructor
@@ -137,8 +139,6 @@ namespace LibVLCSharp.UWP.Sample
             }
         }
 
-
-
         private async void Initialize(InitializedEventArgs eventArgs)
         {
             List<string> options = new List<string>(eventArgs.SwapChainOptions);
@@ -146,21 +146,18 @@ namespace LibVLCSharp.UWP.Sample
             options.Add("--aout=winstore");
             options.Add("--avcodec-fast");
             options.Add("--subsdec-encoding");
-
+            options.Add("--sout-chromecast-conversion-quality=0");
 
             options.Add($"--keystore-file={Path.Combine(ApplicationData.Current.LocalFolder.Path, KeyStoreFilename)}");
             LibVLC = new LibVLC(options.ToArray());
+            LibVLC.SetDialogHandlers(OnDisplayError, OnDisplayLogin, OnDisplayQuestion, OnDisplayProgress, OnUpdateProgress);
+
             LibVLC.Log += LibVLC_Log;
 
             MediaPlayer = new MediaPlayer(LibVLC);
+            MediaPlayer.EncounteredError += MediaPlayer_EncounteredError;
 
-            //MediaPlayer.Play(new Media(LibVLC, "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            //    FromType.FromLocation));
-
-            // create new media
-            //LibVLCSharp.Shared.Media
             var media = new Media(LibVLC,
-                //@"C:\Temp\lesson5.mp4",
                 "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 FromType.FromLocation);
 
@@ -169,10 +166,70 @@ namespace LibVLCSharp.UWP.Sample
             MediaPlayer.Play();
         }
 
+        private async void MediaPlayer_EncounteredError(object sender, EventArgs e)
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    string errorText = "Error occured in MediaPlayer";
+                    if (LibVLC.LastLibVLCError != null)
+                    {
+                        errorText += $"\n LastLibVLCError: {LibVLC.LastLibVLCError}";
+                    }
+                    MessageDialog messageDialog = new MessageDialog("Error", errorText);
+                    _ = messageDialog.ShowAsync();
+                });
+        }
+
+        private async Task OnDisplayError(string title, string text)
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    MessageDialog messageDialog = new MessageDialog(title, text);
+                    _ = messageDialog.ShowAsync();
+                });
+        }
+
+        private async Task OnDisplayLogin(Dialog dialog, string title, string text, string defaultUsername, bool askStore, CancellationToken token)
+        {
+            Debugger.Launch();
+        }
+
+        private async Task OnDisplayQuestion(Dialog dialog, string title, string text, DialogQuestionType type, string cancelText, string firstActionText, string secondActionText, CancellationToken token)
+        {
+            MessageDialog messageDialog = new MessageDialog(text, title);
+            messageDialog.Commands.Add(new UICommand(firstActionText, (IUICommand UICommandInvokedHandler) =>
+            {
+                dialog.PostAction(1);
+            }));
+            messageDialog.Commands.Add(new UICommand(secondActionText, (IUICommand UICommandInvokedHandler) =>
+            {
+                dialog.PostAction(2);
+            }));
+            messageDialog.Commands.Add(new UICommand(cancelText, (IUICommand UICommandInvokedHandler) =>
+            {
+                dialog.Dismiss();
+            }));
+
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, 
+                async () => await messageDialog.ShowAsync());
+        }
+
+        private async Task OnDisplayProgress(Dialog dialog, string title, string text, bool indeterminate, float position, string cancelText, CancellationToken token)
+        {
+            Debugger.Launch();
+        }
+
+        private async Task OnUpdateProgress(Dialog dialog, float position, string text)
+        {
+            Debugger.Launch();
+        }
+
+
         private void LibVLC_Log(object sender, LogEventArgs e)
         {
             Debug.WriteLine($"LibVLC -> {e.Module}: {e.Message}");
-            //Debug.WriteLine(e.Message);
         }
 
         void DiscoverChromecasts(EventArgs args)
@@ -207,7 +264,6 @@ namespace LibVLCSharp.UWP.Sample
             fileOpenPicker.FileTypeFilter.Add("*");
             var file = await fileOpenPicker.PickSingleFileAsync();
 
-            
             if (file != null)
             {
                 StorageApplicationPermissions.FutureAccessList.AddOrReplace(FILE_TOKEN, file);
@@ -217,11 +273,9 @@ namespace LibVLCSharp.UWP.Sample
                 MediaPlayer.Media = media;
                 MediaPlayer.Play();
             }
-            
-
         }
 
-        private async void OpenFileStream(EventArgs obj)
+        internal async void OpenFileStream(EventArgs obj)
         {
             var fileOpenPicker = new FileOpenPicker()
             {
@@ -238,7 +292,6 @@ namespace LibVLCSharp.UWP.Sample
                 Debug.WriteLine($"streamForRead.CanSeek: {streamForRead.CanSeek}");
                 var media = new Media(LibVLC, new StreamMediaInput(streamForRead));
 
-
                 MediaPlayer.Stop();
                 MediaPlayer.Media = media;
                 MediaPlayer.Play();
@@ -250,21 +303,6 @@ namespace LibVLCSharp.UWP.Sample
 
         private void StartCasting(FrameworkElement sender)
         {
-            // abort casting if no renderer items were found
-            //if (!_rendererItems.Any())
-            //{
-            //    Debug.WriteLine("No renderer items found. Abort casting...");
-            //}
-            //else
-            //{
-            //    MediaPlayer.Stop();
-            //    // set the previously discovered renderer item (chromecast) on the mediaplayer
-            //    // if you set it to null, it will start to render normally (i.e. locally) again
-            //    var r = _rendererItems.FirstOrDefault(item => item.Name.Contains("Office"));
-            //    MediaPlayer.SetRenderer(r);
-
-            //    MediaPlayer.Play();
-            //}
             RendererFlyout.ShowAt(sender);
         }
 
