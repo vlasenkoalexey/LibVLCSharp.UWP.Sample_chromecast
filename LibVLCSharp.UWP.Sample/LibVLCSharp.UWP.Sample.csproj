@@ -161,7 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LibVLCSharp">
-      <Version>3.4.6</Version>
+      <Version>3.4.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
@@ -170,7 +170,7 @@
       <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="VideoLAN.LibVLC.UWP">
-      <Version>3.3.0</Version>
+      <Version>3.3.0-alpha</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

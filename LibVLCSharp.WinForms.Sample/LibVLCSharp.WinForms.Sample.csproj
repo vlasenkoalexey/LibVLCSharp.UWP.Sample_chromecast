@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <Title>LibVLCSharp.WinForms.Sample</Title>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net40;netcoreapp3.0</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>LibVLCSharp.WinForms.Sample</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="LibVLCSharp.WinForms" Version="3.4.7" />
+    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.11" />
+  </ItemGroup>
+</Project>
