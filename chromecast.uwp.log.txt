@@ -1,0 +1,318 @@
+
+
+LibVLC -> main: killing decoder fourcc `mp4v'
+LibVLC -> main: killing decoder fourcc `mpga'
+LibVLC -> main: removing module "avcodec"
+LibVLC -> main: saving a free vout
+LibVLC -> main: removing module "mpg123"
+LibVLC -> main: keeping audio output
+LibVLC -> main: removing module "samplerate"
+LibVLC -> main: removing module "cache_read"
+The thread 0x2e90 has exited with code 0 (0x0).
+LibVLC -> main: reusing provided vout
+LibVLC -> main: removing module "float_mixer"
+LibVLC -> main: removing module "winstore"
+LibVLC -> main: removing module "scaletempo"
+LibVLC -> main: removing module "record"
+The thread 0x4774 has exited with code 0 (0x0).
+LibVLC -> main: removing module "avi"
+LibVLC -> main: removing module "mpegaudio"
+LibVLC -> wasapi: reset
+LibVLC -> main: removing module "swscale"
+LibVLC -> main: removing module "freetype"
+LibVLC -> main: Creating an input for 'winrt://'
+LibVLC -> direct3d11: Direct3D11 device adapter closed
+LibVLC -> main: using sout chain=`chromecast{ip=192.168.0.166,port=8009}'
+LibVLC -> main: stream=`chromecast'
+LibVLC -> main: removing module "access_winrt"
+LibVLC -> gnutls: using GnuTLS version 3.6.14
+LibVLC -> main: Program doesn't contain anymore ES
+LibVLC -> main: using tls client module "gnutls"
+LibVLC -> main: resolving 192.168.0.166 ...
+LibVLC -> direct3d11: Direct3D11 resources destroyed
+LibVLC -> main: destroying useless vout
+LibVLC -> gnutls: TLS handshake: Resource temporarily unavailable, try again.
+LibVLC -> gnutls: loaded 40 trusted CAs from system
+LibVLC -> main: removing module "direct3d11"
+LibVLC -> main: set config option: sout-chromecast-ip to 192.168.0.166
+LibVLC -> main: looking for sout stream module matching "chromecast": 22 candidates
+LibVLC -> main: set config option: sout-chromecast-port to 8009
+LibVLC -> main: looking for tls client module matching "any": 1 candidates
+LibVLC -> main: removing module "yuvp"
+LibVLC -> main: net: listening to * port 8010
+LibVLC -> gnutls: TLS handshake: Success.
+LibVLC -> gnutls: Accepting self-signed/untrusted CA certificate.
+LibVLC -> main: `winrt://{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}' gives access `winrt' demux `any' path `{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}'
+LibVLC -> main: no access_demux modules matched
+LibVLC -> stream_out_chromecast: Media receiver application was already running
+LibVLC -> cache_read: pre-buffering done 1024 bytes in 0s - 49 KiB/s
+LibVLC -> main: looking for stream_filter module matching "any": 22 candidates
+LibVLC -> main:  (path: \\{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107})
+LibVLC -> main: using stream_filter module "record"
+LibVLC -> main: attachment of directory-extractor failed for winrt://{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}
+LibVLC -> main: looking for stream_filter module matching "record": 22 candidates
+LibVLC -> gnutls: Certificate verification failure: The certificate is NOT trusted. The certificate issuer is unknown. The name in the certificate does not match the expected. 
+LibVLC -> main: using timeshift granularity of 50 MiB
+LibVLC -> main: using sout stream module "stream_out_chromecast"
+LibVLC -> cache_read: Using stream method for AStream*
+LibVLC -> main: using access module "access_winrt"
+LibVLC -> main: using default timeshift path
+LibVLC -> cache_read: received first data after 0 ms
+LibVLC -> main: creating demux: access='winrt' demux='any' location='{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}' file='\\{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}'
+LibVLC -> main: looking for access_demux module matching "winrt": 6 candidates
+LibVLC -> main: using stream_filter module "cache_read"
+LibVLC -> main: creating access: winrt://{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}
+LibVLC -> avi: <list 'AVI '>
+LibVLC -> main: looking for access module matching "winrt": 23 candidates
+LibVLC -> avi: <list 'strl'>
+LibVLC -> avi: </list 'strl'>0
+LibVLC -> avi: </list 'hdrl'>0
+LibVLC -> avi: <list 'INFO'>
+LibVLC -> avi: </list 'INFO'>0
+LibVLC -> avi: skipping movi chunk
+LibVLC -> avi: </list 'AVI '>0
+LibVLC -> avi: no more data at 977220438
+LibVLC -> avi: * LIST-root size:977220438 pos:0
+LibVLC -> avi:     + RIFF-AVI  size:977220430 pos:0
+LibVLC -> avi:     |   + LIST-hdrl size:8906 pos:12
+LibVLC -> avi:     |   |   + avih size:56 pos:24
+LibVLC -> avi:     |   |   + LIST-strl size:4320 pos:88
+LibVLC -> avi:     |   |   |   + strh size:56 pos:100
+LibVLC -> avi:     |   |   |   + strf size:40 pos:164
+LibVLC -> avi:     |   |   |   + JUNK size:4120 pos:212
+LibVLC -> avi:     |   |   |   + vprp size:68 pos:4340
+LibVLC -> avi:     |   |   + LIST-strl size:4234 pos:4416
+LibVLC -> avi:     |   |   |   + strh size:56 pos:4428
+LibVLC -> avi:     |   |   |   + strf size:30 pos:4492
+LibVLC -> avi:     |   |   |   + JUNK size:4120 pos:4530
+LibVLC -> avi:     |   |   + JUNK size:260 pos:8658
+LibVLC -> avi:     |   + LIST-INFO size:26 pos:8926
+LibVLC -> avi:     |   |   + ISFT size:14 pos:8938
+LibVLC -> avi:     |   + JUNK size:1016 pos:8960
+LibVLC -> avi:     |   + LIST-movi size:974489830 pos:9984
+LibVLC -> avi:     |   + idx1 size:2720608 pos:974499822
+LibVLC -> avi: AVIH: 2 stream, flags  HAS_INDEX IS_INTERLEAVED TRUST_CKTYPE 
+LibVLC -> avi: stream[0] rate:24000 scale:1001 samplesize:0
+LibVLC -> avi: stream[0] video(xvid) 640x360 24bpp 23.976025fps
+LibVLC -> main: selecting program id=0
+LibVLC -> avi: stream[1] rate:125 scale:3 samplesize:0
+LibVLC -> avi: stream[1] audio(0x55 - MPEG Audio layer 3) 2 channels 48000Hz 0bits
+LibVLC -> avi: selected standard index for stream[0]
+LibVLC -> avi: selected standard index for stream[1]
+LibVLC -> avi: stream[0] created 62105 index entries
+LibVLC -> avi: stream[1] created 107933 index entries
+LibVLC -> avi: stream[0] length:2590 (based on index)
+LibVLC -> avi: stream[1] length:2590 (based on index)
+LibVLC -> main: using demux module "avi"
+LibVLC -> main: looking for demux_filter module matching "cc_demux": 2 candidates
+LibVLC -> main: ES_OUT_RESET_PCR called
+LibVLC -> main: using demux_filter module "demux_chromecast"
+LibVLC -> main: looking for packetizer module matching "any": 25 candidates
+LibVLC -> main: using packetizer module "mpeg4video"
+LibVLC -> main: looking for packetizer module matching "any": 25 candidates
+LibVLC -> main: using packetizer module "mpegaudio"
+LibVLC -> main: starting in sync mode
+LibVLC -> main: looking for meta reader module matching "any": 2 candidates
+LibVLC -> lua: Trying Lua scripts in C:\Users\vlase\AppData\Local\Packages\6adbf218-caa7-4240-9689-3b74cf39ad2d_hj88em4th0swa\LocalState\vlc\lua\meta\reader
+LibVLC -> main: no meta reader modules matched
+LibVLC -> main: `winrt://{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}' successfully opened
+LibVLC -> main: Buffering 0%
+LibVLC -> main: switching to async mode
+LibVLC -> main: Buffering 8%
+LibVLC -> main: Buffering 16%
+LibVLC -> main: Buffering 25%
+LibVLC -> mpeg4video: waiting for VOL
+LibVLC -> mpegaudio: MPGA channels:2 samplerate:48000 bitrate:128
+LibVLC -> mpeg4video: waiting for VOL
+LibVLC -> main: adding a new sout input for `mpga` (sout_input: 000002799AD57490)
+LibVLC -> main: Buffering 33%
+LibVLC -> main: adding a new sout input for `mp4v` (sout_input: 000002799AD574C0)
+LibVLC -> main: Buffering 41%
+LibVLC -> main: Buffering 50%
+LibVLC -> main: looking for stream_filter module matching "prefetch,cache_read": 22 candidates
+LibVLC -> lua: Trying Lua scripts in C:\Users\vlase\AppData\Local\Packages\6adbf218-caa7-4240-9689-3b74cf39ad2d_hj88em4th0swa\LocalState\vlc\lua\playlist
+LibVLC -> cache_read: starting pre-buffering
+LibVLC -> main: no stream_directory modules matched
+LibVLC -> main: creating demux: access='winrt' demux='any' location='{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}' file='\\{1BBC4B94-BE33-4D79-A0CB-E5C6CDB9D107}'
+LibVLC -> main: no stream_filter modules matched
+LibVLC -> avi: <list 'hdrl'>
+LibVLC -> main: looking for stream_directory module matching "any": 1 candidates
+LibVLC -> avi: <list 'strl'>
+LibVLC -> avi: </list 'strl'>0
+LibVLC -> main: looking for demux module matching "any": 52 candidates
+LibVLC -> stream_out_chromecast: can't remux video track 0 codec mp4v
+LibVLC -> main: Buffering 58%
+LibVLC -> stream_out_chromecast: can't remux audio track 1 codec mpga
+LibVLC -> main: Stream buffering done (325 ms in 44 ms)
+LibVLC -> main: Decoder wait done in 0 ms
+LibVLC -> main: Buffering 66%
+LibVLC -> main: Buffering 83%
+LibVLC -> main: Buffering 91%
+LibVLC -> main: Buffering 75%
+LibVLC -> main: Buffering 100%
+LibVLC -> stream_out_chromecast: PING received from the Chromecast
+
+LibVLC -> stream_out_chromecast: PING received from the Chromecast
+
+LibVLC -> stream_out_chromecast: PING received from the Chromecast
+
+LibVLC -> stream_out_chromecast: PING received from the Chromecast
+LibVLC -> stream_out_chromecast: Converting audio to mp3 
+LibVLC -> main: stream=`dummy'
+LibVLC -> main: looking for sout stream module matching "dummy": 22 candidates
+LibVLC -> main: looking for sout stream module matching "transcode": 22 candidates
+LibVLC -> main: set config option: sout-transcode-vb to 8000000
+LibVLC -> stream_out_transcode: codec video=h264 0x0 scaling: 0.000000 8000kb/s
+LibVLC -> main: set config option: sout-transcode-vcodec to h264
+LibVLC -> main: destroying chain... (name=dummy)
+LibVLC -> main: stream=`dummy'
+LibVLC -> main: destroying chain done
+LibVLC -> main: using sout stream module "dummy"
+LibVLC -> main: looking for sout stream module matching "transcode": 22 candidates
+LibVLC -> main: removing module "dummy"
+LibVLC -> main: destroying chain done
+LibVLC -> main: looking for sout stream module matching "transcode": 22 candidates
+LibVLC -> main: set config option: sout-transcode-venc to qsv{target-usage=balanced}
+LibVLC -> main: using sout stream module "dummy"
+LibVLC -> main: stream=`transcode'
+LibVLC -> main: removing module "dummy"
+LibVLC -> main: using sout stream module "stream_out_transcode"
+LibVLC -> main: set config option: sout-transcode-vcodec to h264
+LibVLC -> main: looking for sout stream module matching "dummy": 22 candidates
+LibVLC -> stream_out_transcode: Checking video codec mapping for h264 got h264 
+LibVLC -> main: set config option: sout-transcode-venc to x264{preset=veryfast,crf=21}
+LibVLC -> main: destroying chain... (name=dummy)
+LibVLC -> main: stream=`dummy'
+LibVLC -> main: looking for sout stream module matching "dummy": 22 candidates
+LibVLC -> main: set config option: sout-transcode-venc to vpx{quality-mode=1}
+LibVLC -> main: removing module "dummy"
+LibVLC -> main: destroying chain done
+LibVLC -> stream_out_chromecast: Converting video to VP80
+LibVLC -> stream_out_chromecast: Creating chain transcode{acodec=mp3 ,ab=320,vcodec=VP80,venc=vpx{quality-mode=1},maxwidth=1920,maxheight=1080,}:chromecast-proxy:std{mux=avformat{mux=matroska,options={live=1},reset-ts},access=chromecast-http}
+LibVLC -> main: stream=`std'
+LibVLC -> main: looking for sout stream module matching "std": 22 candidates
+LibVLC -> main: set config option: sout-standard-mux to avformat{mux=matroska,options={live=1},reset-ts}
+LibVLC -> main: set config option: sout-standard-access to chromecast-http
+LibVLC -> main: looking for sout access module matching "chromecast-http": 9 candidates
+LibVLC -> main: using sout access module "stream_out_chromecast"
+LibVLC -> main: looking for sout mux module matching "avformat": 11 candidates
+LibVLC -> avcodec: using ffmpeg Lavf58.3.100
+LibVLC -> avcodec: CPU flags: 0x0007d3db
+LibVLC -> main: set config option: sout-avformat-mux to matroska
+LibVLC -> main: set config option: sout-avformat-options to live=1
+LibVLC -> main: set config option: sout-avformat-reset-ts to (null)
+LibVLC -> main: using sout mux module "avcodec"
+LibVLC -> stream_out_standard: using `chromecast-http/avformat{mux=matroska,options={live=1},reset-ts}://(null)'
+LibVLC -> main: using sout stream module "stream_out_standard"
+LibVLC -> main: stream=`chromecast-proxy'
+LibVLC -> main: looking for sout stream module matching "chromecast-proxy": 22 candidates
+LibVLC -> main: using sout stream module "stream_out_chromecast"
+LibVLC -> main: stream=`transcode'
+LibVLC -> main: looking for sout stream module matching "transcode": 22 candidates
+LibVLC -> main: set config option: sout-transcode-acodec to mp3
+LibVLC -> main: set config option: sout-transcode-ab to 320
+LibVLC -> main: set config option: sout-transcode-vcodec to VP80
+LibVLC -> main: set config option: sout-transcode-venc to vpx{quality-mode=1}
+LibVLC -> main: set config option: sout-transcode-maxwidth to 1920
+LibVLC -> main: set config option: sout-transcode-maxheight to 1080
+LibVLC -> stream_out_transcode: Checking codec mapping for mp3  got mp3  
+LibVLC -> stream_out_transcode: codec audio=mp3  0Hz 0 channels 320Kb/s
+LibVLC -> stream_out_transcode: Checking video codec mapping for VP80 got VP80 
+LibVLC -> stream_out_transcode: codec video=VP80 0x0 scaling: 0.000000 0kb/s
+LibVLC -> main: using sout stream module "stream_out_transcode"
+LibVLC -> stream_out_transcode: creating audio transcoding from fcc=`mpga' to fcc=`mp3 '
+LibVLC -> main: looking for audio decoder module matching "any": 20 candidates
+LibVLC -> mpg123: mpga->f32l, bits per sample: 32
+LibVLC -> main: using audio decoder module "mpg123"
+LibVLC -> main: looking for encoder module matching "any": 17 candidates
+LibVLC -> avcodec: using ffmpeg Lavc58.6.103
+LibVLC -> avcodec: CPU flags: 0x0007d3db
+LibVLC -> avcodec: Trying to find more suitable sample format instead of s32p
+LibVLC -> avcodec: Using fltp as new sample format
+LibVLC -> avcodec: Trying to find packet sample format instead of planar fltp
+LibVLC -> avcodec: Ended up using fltp as sample format
+LibVLC -> avcodec: Creating channel order for reordering
+LibVLC -> avcodec: 0 1 mapped to 2
+LibVLC -> avcodec: 1 2 mapped to 4
+LibVLC -> avcodec: found encoder MPEG Audio layer 3
+LibVLC -> main: using encoder module "avcodec"
+LibVLC -> main: input 'f32l' 48000 Hz Stereo frame=1 samples/8 bytes
+LibVLC -> main: conversion: 'f32l'->'f32l' 48000 Hz->48000 Hz Stereo->Stereo
+LibVLC -> main: conversion pipeline complete
+LibVLC -> main: looking for audio resampler module matching "any": 3 candidates
+LibVLC -> main: using audio resampler module "samplerate"
+LibVLC -> main: removing module "avcodec"
+LibVLC -> main: removing module "samplerate"
+LibVLC -> stream_out_transcode: creating video transcoding from fcc=`mp4v' to fcc=`VP80'
+LibVLC -> main: looking for video decoder module matching "any": 14 candidates
+LibVLC -> avcodec: using ffmpeg Lavc58.6.103
+LibVLC -> avcodec: CPU flags: 0x0007d3db
+LibVLC -> avcodec: allowing 6 thread(s) for decoding
+LibVLC -> avcodec: codec (mpeg4) started
+LibVLC -> main: using video decoder module "avcodec"
+LibVLC -> main: looking for encoder module matching "vpx": 17 candidates
+LibVLC -> vpx: VP8: using libvpx version v1.8.2 (build options --target=x86_64-win64-gcc --disable-docs --disable-examples --disable-unit-tests --disable-install-bins --disable-install-docs --disable-dependency-tracking --enable-vp9-highbitdepth --disable-tools --enable-runtime-cpu-detect --extra-cflags=-mstackrealign --disable-mmx --prefix=/builds/videolan/vlc-winrt/libvlc/vlc/contrib/x86_64-w64-mingw32)
+LibVLC -> main: set config option: sout-vpx-quality-mode to 1
+LibVLC -> main: using encoder module "vpx"
+LibVLC -> main: removing module "vpx"
+LibVLC -> avcodec: available hardware decoder output format 119 (cuda)
+LibVLC -> avcodec: available software decoder output format 0 (yuv420p)
+LibVLC -> stream_out_transcode: source fps 24000/1001, destination 24000/1001
+LibVLC -> stream_out_transcode: decoder aspect is 1.666667:1
+LibVLC -> stream_out_transcode: source pixel aspect is 0.937500:1
+LibVLC -> stream_out_transcode: scaled pixel aspect is 0.937500:1
+LibVLC -> stream_out_transcode: source 640x360, destination 640x360
+LibVLC -> stream_out_transcode: encoder aspect is 640:384
+LibVLC -> stream_out_transcode: source chroma: I420, destination I420
+LibVLC -> stream_out_transcode: destination (after video filters) 640x384
+LibVLC -> main: looking for encoder module matching "vpx": 17 candidates
+LibVLC -> vpx: VP8: using libvpx version v1.8.2 (build options --target=x86_64-win64-gcc --disable-docs --disable-examples --disable-unit-tests --disable-install-bins --disable-install-docs --disable-dependency-tracking --enable-vp9-highbitdepth --disable-tools --enable-runtime-cpu-detect --extra-cflags=-mstackrealign --disable-mmx --prefix=/builds/videolan/vlc-winrt/libvlc/vlc/contrib/x86_64-w64-mingw32)
+LibVLC -> main: set config option: sout-vpx-quality-mode to 1
+LibVLC -> main: using encoder module "vpx"
+LibVLC -> main: adding a new input
+LibVLC -> avcodec: adding input
+LibVLC -> avcodec: Muxing framerate will be 24000/1001 = 23.98 fps
+LibVLC -> avcodec: Muxing aspect ratio will be 1/1
+LibVLC -> avcodec: Missing video bitrate, assuming 512k
+LibVLC -> main: looking for encoder module matching "any": 17 candidates
+LibVLC -> avcodec: using ffmpeg Lavc58.6.103
+LibVLC -> avcodec: CPU flags: 0x0007d3db
+LibVLC -> avcodec: Trying to find more suitable sample format instead of s32p
+LibVLC -> avcodec: Using fltp as new sample format
+LibVLC -> avcodec: Trying to find packet sample format instead of planar fltp
+LibVLC -> avcodec: Ended up using fltp as sample format
+LibVLC -> avcodec: Creating channel order for reordering
+LibVLC -> avcodec: 0 1 mapped to 2
+LibVLC -> main: stream=`transcode'
+LibVLC -> stream_out_transcode: Checking video codec mapping for h264 got h264 
+LibVLC -> main: using sout stream module "stream_out_transcode"
+LibVLC -> stream_out_transcode: codec video=h264 0x0 scaling: 0.000000 0kb/s
+LibVLC -> stream_out_transcode: codec video=VP80 0x0 scaling: 0.000000 0kb/s
+LibVLC -> main: using sout stream module "stream_out_transcode"
+LibVLC -> main: destroying chain... (name=dummy)
+LibVLC -> main: stream=`transcode'
+LibVLC -> main: using sout stream module "dummy"
+LibVLC -> main: set config option: sout-transcode-vcodec to VP80
+LibVLC -> stream_out_transcode: Checking video codec mapping for VP80 got VP80 
+LibVLC -> main: conversion: 'f32l'->'f32l' 48000 Hz->48000 Hz Stereo->Stereo
+LibVLC -> avcodec: 1 2 mapped to 4
+LibVLC -> main: input 'f32l' 48000 Hz Stereo frame=1 samples/8 bytes
+LibVLC -> main: looking for audio resampler module matching "any": 3 candidates
+LibVLC -> main: conversion pipeline complete
+LibVLC -> avcodec: adding input
+LibVLC -> main: using encoder module "avcodec"
+LibVLC -> avcodec: found encoder MPEG Audio layer 3
+LibVLC -> main: using audio resampler module "samplerate"
+LibVLC -> main: adding a new input
+LibVLC -> avcodec: writing header
+LibVLC -> stream_out_chromecast: Loading content
+LibVLC -> stream_out_chromecast: s_chromecast_url: http://192.168.0.162:8010/chromecast/81300319118/18446744073452400773/stream
+LibVLC -> stream_out_chromecast: Player state: PLAYING sessionId: 4
+LibVLC -> stream_out_chromecast: New mediaSessionId: 4
+LibVLC -> stream_out_chromecast: Player state: PLAYING sessionId: 4
+LibVLC -> stream_out_chromecast: Player state: BUFFERING sessionId: 4
+LibVLC -> stream_out_chromecast: Player state: PLAYING sessionId: 4
+LibVLC -> stream_out_chromecast: Player state: PLAYING sessionId: 4
+
+LibVLC -> stream_out_chromecast: Player state: PLAYING sessionId: 4
+
